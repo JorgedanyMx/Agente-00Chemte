@@ -5,3 +5,4 @@ El juego está desarrollado para participar en la Mini Game Work Jam 2023 Contra
 https://itch.io/jam/mini-game-work-jam-2023
 
 Juego sin fines de lucro.
+Desarrollado con GODOT Engine (V. 4.0.3)
