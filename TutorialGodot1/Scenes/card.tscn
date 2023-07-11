@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8mhfndoft41d"]
+
+[ext_resource type="Script" path="res://Scenes/Card.gd" id="1_j7sfy"]
+[ext_resource type="Texture2D" uid="uid://bfj2v0pxdlmfx" path="res://Sprites/back.png" id="2_3d6im"]
+[ext_resource type="Texture2D" uid="uid://ci4dp60gby8cq" path="res://Sprites/CardBG.png" id="3_cs51s"]
+[ext_resource type="Texture2D" uid="uid://b3ewucjnnkfns" path="res://Sprites/chem.png" id="4_xd4t2"]
+[ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Dialogo.png" id="5_lpp6b"]
+
+[node name="Card" type="Container"]
+offset_left = -1.0
+offset_right = 39.0
+offset_bottom = 40.0
+script = ExtResource("1_j7sfy")
+metadata/_edit_group_ = true
+
+[node name="Back" type="Sprite2D" parent="."]
+texture = ExtResource("2_3d6im")
+
+[node name="Front" type="Sprite2D" parent="."]
+self_modulate = Color(0.681642, 0.641093, 0.290635, 1)
+position = Vector2(22, 509)
+texture = ExtResource("3_cs51s")
+offset = Vector2(-22, -509)
+
+[node name="Content" type="Sprite2D" parent="Front"]
+position = Vector2(9, -437)
+scale = Vector2(0.526531, 0.526531)
+texture = ExtResource("4_xd4t2")
+offset = Vector2(-17.093, -1.89923)
+
+[node name="RespDer" type="Sprite2D" parent="Front/Content"]
+position = Vector2(953.41, -1006.59)
+scale = Vector2(2.74572, 2.74572)
+texture = ExtResource("5_lpp6b")
+
+[node name="txtRespDer" type="RichTextLabel" parent="Front/Content/RespDer"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.283
+anchor_right = 0.867
+anchor_bottom = 0.637
+offset_left = -256.096
+offset_top = -255.896
+offset_right = -255.904
+offset_bottom = -256.144
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 28
+text = "Texto textoso que se textea siempre al textear"
+
+[node name="RespIzq" type="Sprite2D" parent="Front/Content"]
+position = Vector2(-1036.98, -1006.59)
+scale = Vector2(2.74572, 2.74572)
+texture = ExtResource("5_lpp6b")
+flip_h = true
+
+[node name="txtRespIzq" type="RichTextLabel" parent="Front/Content/RespIzq"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.283
+anchor_right = 0.867
+anchor_bottom = 0.637
+offset_left = -256.096
+offset_top = -255.896
+offset_right = -255.904
+offset_bottom = -256.144
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 28
+text = "Texto textoso que se textea siempre al textear"

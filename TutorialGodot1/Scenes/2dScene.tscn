@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2hrnisjo0dqa"]
+
+[ext_resource type="PackedScene" uid="uid://c8mhfndoft41d" path="res://Scenes/card.tscn" id="1_obtrs"]
+[ext_resource type="Texture2D" uid="uid://b080qufyf6kmh" path="res://Sprites/Cap1/Chemtective1.png" id="2_mrykm"]
+
+[node name="2dScene" type="Node2D"]
+
+[node name="Card" parent="." instance=ExtResource("1_obtrs")]
+
+[node name="Content" parent="Card/Front" index="0"]
+position = Vector2(-21, -509)
+scale = Vector2(0.927982, 0.927982)
+texture = ExtResource("2_mrykm")
+
+[editable path="Card"]

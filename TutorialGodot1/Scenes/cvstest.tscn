@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://dg84eqj75b4dn"]
+
+[ext_resource type="Script" path="res://Scripts/cvstest.gd" id="1_qtirs"]
+[ext_resource type="Texture2D" uid="uid://bcitlc66625pq" path="res://Sprites/bg2.jpg" id="2_a51e2"]
+[ext_resource type="Texture2D" uid="uid://ddxmq1skqlofi" path="res://Sprites/cardbg1.jpg" id="2_ajcpe"]
+[ext_resource type="FontFile" uid="uid://cdwav2ai3eo0u" path="res://Fonts/MorrisRomanBlack.ttf" id="3_no0v1"]
+
+[sub_resource type="Animation" id="Animation_kvi7l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(240.987, 398)]
+}
+
+[sub_resource type="Animation" id="Animation_iftp7"]
+resource_name = "esperando"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(240.987, 398), Vector2(240.987, 390), Vector2(240.987, 398)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8vb7"]
+_data = {
+"RESET": SubResource("Animation_kvi7l"),
+"esperando": SubResource("Animation_iftp7")
+}
+
+[node name="Cvstest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qtirs")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.52
+anchor_top = 1.0
+anchor_right = 0.52
+anchor_bottom = 1.0
+offset_left = -164.04
+offset_top = -511.0
+offset_right = 164.96
+offset_bottom = -19.0
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a51e2")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.023
+anchor_right = 0.966
+anchor_bottom = 0.244
+offset_bottom = -0.0480118
+theme_override_fonts/normal_font = ExtResource("3_no0v1")
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "[color=#000000] adsadjk[/color] ashdkashjkhkjhasjkhdjksah djkashdkjashkjdhaskjdhaskjhds sad asd sad asd sad asd asd sd as dsad sadsadasm febbkjhh kja hdkah jk khwklj hkjhs jkhd jkash  jkdhw jkah kjdhsajkh djkash "
+scroll_active = false
+
+[node name="next" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.998
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = -88.013
+offset_top = -93.016
+offset_right = -18.013
+offset_bottom = -20.016
+texture = ExtResource("2_ajcpe")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/next"]
+libraries = {
+"": SubResource("AnimationLibrary_b8vb7")
+}
