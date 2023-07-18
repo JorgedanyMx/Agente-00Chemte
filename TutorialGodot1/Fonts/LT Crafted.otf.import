@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://ceot41yfkopgt"
+path="res://.godot/imported/LT Crafted.otf-7cbd39ebfb101b57c4db41597ff664e5.fontdata"
+
+[deps]
+
+source_file="res://Fonts/LT Crafted.otf"
+dest_files=["res://.godot/imported/LT Crafted.otf-7cbd39ebfb101b57c4db41597ff664e5.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

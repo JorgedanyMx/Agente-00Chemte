@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6r0vvcejbthb"]
+[gd_scene load_steps=14 format=3 uid="uid://c6r0vvcejbthb"]
 
 [ext_resource type="Script" path="res://Scripts/cvstest.gd" id="1_fdyoq"]
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
-[ext_resource type="Texture2D" uid="uid://ddxmq1skqlofi" path="res://Sprites/cardbg1.jpg" id="3_ws4t0"]
-[ext_resource type="FontFile" uid="uid://cdwav2ai3eo0u" path="res://Fonts/MorrisRomanBlack.ttf" id="4_aoas3"]
+[ext_resource type="FontFile" uid="uid://cuvbydnpy5d32" path="res://Fonts/Planet Comic.otf" id="3_g8x8e"]
+[ext_resource type="FontFile" uid="uid://ceot41yfkopgt" path="res://Fonts/LT Crafted.otf" id="3_m4qun"]
 [ext_resource type="Texture2D" uid="uid://brc1kibopukjm" path="res://Sprites/button.png" id="6_c40fq"]
 [ext_resource type="PackedScene" uid="uid://bogmqbat6i0l3" path="res://Pref/card.tscn" id="6_fg0nq"]
 [ext_resource type="Texture2D" uid="uid://b080qufyf6kmh" path="res://Sprites/Cap1/Chemtective1.png" id="6_r31ui"]
@@ -12,43 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dbdwtxvf8qgx6" path="res://Sprites/hover.png" id="8_krfug"]
 [ext_resource type="Texture2D" uid="uid://bcitlc66625pq" path="res://Sprites/bg2.jpg" id="10_p33la"]
 [ext_resource type="Script" path="res://Scenes/MenuControl.gd" id="10_phr34"]
-
-[sub_resource type="Animation" id="Animation_kvi7l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(240.987, 398)]
-}
-
-[sub_resource type="Animation" id="Animation_iftp7"]
-resource_name = "esperando"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(240.987, 398), Vector2(240.987, 390), Vector2(240.987, 398)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8vb7"]
-_data = {
-"RESET": SubResource("Animation_kvi7l"),
-"esperando": SubResource("Animation_iftp7")
-}
+[ext_resource type="Texture2D" uid="uid://bvb2428svbo8p" path="res://arrow.png" id="13_wdhn0"]
 
 [node name="Chemtective" type="Control"]
 layout_mode = 3
@@ -60,19 +24,15 @@ grow_vertical = 2
 script = ExtResource("1_fdyoq")
 metadata/_edit_vertical_guides_ = []
 
-[node name="Control" type="Control" parent="."]
+[node name="Game" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0319824
-offset_bottom = 0.271851
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("2_6btu7")
 metadata/_edit_group_ = true
 
-[node name="BgColor" type="ColorRect" parent="Control"]
+[node name="BgColor" type="ColorRect" parent="Game"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.709804, 0.603922, 0.211765, 1)
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Game"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -89,7 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/Panel"]
+[node name="ColorRect" type="ColorRect" parent="Game/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.20368, 0.176845, 0.109652, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Control/Panel"]
+[node name="ColorRect2" type="ColorRect" parent="Game/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.2
@@ -109,21 +69,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.862745, 0.87451, 0.690196, 1)
 
-[node name="Dialogo1" type="RichTextLabel" parent="Control/Panel"]
+[node name="Dialogo1" type="RichTextLabel" parent="Game/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.01
-anchor_right = 0.95
-anchor_bottom = 0.194
-theme_override_fonts/normal_font = ExtResource("4_aoas3")
-theme_override_font_sizes/normal_font_size = 60
-bbcode_enabled = true
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.195
+theme_override_fonts/normal_font = ExtResource("3_m4qun")
+theme_override_font_sizes/normal_font_size = 45
 text = "[color=#000000] adsadjk[/color] ashdkashjkhkjhasjkhdjksah djkashdkjashkjdhaskjdhaskjhds sad asd sad asd sad asd asd sd as dsad sadsadasm febbkjhh kja hdkah jk khwklj hkjhs jkhd jkash  jkdhw jkah kjdhsajkh djkash "
 scroll_active = false
-autowrap_mode = 1
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+text_direction = 3
 
-[node name="Dialogo2" type="RichTextLabel" parent="Control/Panel"]
+[node name="Dialogo2" type="RichTextLabel" parent="Game/Panel"]
+layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.806
@@ -134,80 +96,65 @@ offset_top = 11.6677
 offset_right = -12.488
 offset_bottom = -12.0549
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("4_aoas3")
-theme_override_font_sizes/normal_font_size = 60
+theme_override_fonts/normal_font = ExtResource("3_g8x8e")
+theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
 text = "[color=#000000] adsadjk[/color] ashdkashjkhkjhasjkhdjksah djkashdkjashkjdhaskjdhaskjhds sad asd sad asd sad asd asd sd as dsad sadsadasm febbkjhh kja hdkah jk khwklj hkjhs jkhd jkash  jkdhw jkah kjdhsajkh djkash "
 scroll_active = false
+text_direction = 3
 
-[node name="next" type="TextureRect" parent="Control/Panel"]
-visible = false
+[node name="bankCard" parent="Game/Panel" instance=ExtResource("6_fg0nq")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.998
-anchor_right = 1.0
-anchor_bottom = 0.998
-offset_left = -839.045
-offset_top = -1518.43
-offset_right = -769.045
-offset_bottom = -1445.43
-texture = ExtResource("3_ws4t0")
-expand_mode = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Panel/next"]
-libraries = {
-"": SubResource("AnimationLibrary_b8vb7")
-}
-
-[node name="bankCard" parent="Control/Panel" instance=ExtResource("6_fg0nq")]
-layout_mode = 0
-offset_left = 542.0
-offset_top = 962.0
-offset_right = 542.0
-offset_bottom = 962.0
-
-[node name="currentCard" parent="Control/Panel" instance=ExtResource("6_fg0nq")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.511
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.511
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -7.8963
-offset_top = 2.86414
-offset_right = -7.8963
-offset_bottom = 2.86414
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="currentCard" parent="Game/Panel" instance=ExtResource("6_fg0nq")]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Front" parent="Control/Panel/currentCard" index="1"]
+[node name="Front" parent="Game/Panel/currentCard" index="1"]
 position = Vector2(22, 508)
 
-[node name="Content" parent="Control/Panel/currentCard/Front" index="0"]
+[node name="Content" parent="Game/Panel/currentCard/Front" index="0"]
 position = Vector2(-15.7908, -502.791)
 scale = Vector2(0.846, 0.846)
 texture = ExtResource("6_r31ui")
 
-[node name="RespDer" parent="Control/Panel/currentCard/Front/Content" index="0"]
-position = Vector2(737.608, -700)
+[node name="RespDer" parent="Game/Panel/currentCard/Front/Content" index="0"]
+position = Vector2(737.608, -325.101)
 scale = Vector2(1.76, 1.76)
 
-[node name="txtRespDer" parent="Control/Panel/currentCard/Front/Content/RespDer" index="0"]
+[node name="txtRespDer" parent="Game/Panel/currentCard/Front/Content/RespDer" index="0"]
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 
-[node name="RespIzq" parent="Control/Panel/currentCard/Front/Content" index="1"]
-position = Vector2(-649.535, -700)
+[node name="RespIzq" parent="Game/Panel/currentCard/Front/Content" index="1"]
+position = Vector2(-649.535, -325.101)
 scale = Vector2(1.76, 1.76)
 
-[node name="txtRespIzq" parent="Control/Panel/currentCard/Front/Content/RespIzq" index="0"]
+[node name="txtRespIzq" parent="Game/Panel/currentCard/Front/Content/RespIzq" index="0"]
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
+metadata/_edit_use_anchors_ = true
 
 [node name="IU" type="Control" parent="."]
 layout_mode = 1
@@ -220,23 +167,24 @@ script = ExtResource("6_uip2p")
 
 [node name="HUD" type="Control" parent="IU"]
 layout_mode = 1
-anchor_right = 0.93
-anchor_bottom = 2.981
-offset_right = -0.360107
-offset_bottom = 0.31189
+anchor_right = 1.0
+anchor_bottom = 0.05
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="IU/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.352941, 0.0235294, 0.152941, 1)
+
 [node name="btnMenu" type="TextureButton" parent="IU/HUD"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 0.9
 anchor_right = 1.0
-offset_left = -68.0
-offset_top = 10.0
-offset_right = -13.0
-offset_bottom = 65.0
-grow_horizontal = 0
+anchor_bottom = 1.0
 texture_normal = ExtResource("6_c40fq")
 texture_pressed = ExtResource("7_hucs5")
 texture_hover = ExtResource("8_krfug")
@@ -346,9 +294,16 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 34
 text = "Salir"
 
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.909804)
+position = Vector2(748, 1400)
+scale = Vector2(0.640625, 0.671875)
+texture = ExtResource("13_wdhn0")
+offset = Vector2(192, -215.814)
+
 [connection signal="pressed" from="IU/HUD/btnMenu" to="IU" method="_on_btn_menu_pressed"]
 [connection signal="value_changed" from="IU/Menu/bgMenu/Panel/volSlider" to="IU/Menu" method="_on_vol_slider_value_changed"]
 [connection signal="pressed" from="IU/Menu/bgMenu/Panel/Continuar" to="IU" method="_on_continuar_pressed"]
 [connection signal="pressed" from="IU/Menu/bgMenu/Panel/Salir" to="IU/Menu" method="_on_salir_pressed"]
 
-[editable path="Control/Panel/currentCard"]
+[editable path="Game/Panel/currentCard"]

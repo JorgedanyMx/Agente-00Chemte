@@ -1,16 +1,107 @@
-[gd_scene load_steps=6 format=3 uid="uid://bogmqbat6i0l3"]
+[gd_scene load_steps=10 format=3 uid="uid://bogmqbat6i0l3"]
 
 [ext_resource type="Script" path="res://Scenes/Card.gd" id="1_oog31"]
 [ext_resource type="Texture2D" uid="uid://bfj2v0pxdlmfx" path="res://Sprites/back.png" id="2_ggcja"]
 [ext_resource type="Texture2D" uid="uid://ci4dp60gby8cq" path="res://Sprites/CardBG.png" id="3_eet83"]
 [ext_resource type="Texture2D" uid="uid://b3ewucjnnkfns" path="res://Sprites/chem.png" id="4_jksk4"]
 [ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Dialogo.png" id="5_mxi4i"]
+[ext_resource type="AudioStream" uid="uid://r6yayuskobmm" path="res://Audio/Aire1.wav" id="6_guj06"]
+
+[sub_resource type="Animation" id="Animation_gbn6c"]
+resource_name = "FlipFront"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Front:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_umvw8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Front:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0nrrf"]
+_data = {
+"FlipFront": SubResource("Animation_gbn6c"),
+"RESET": SubResource("Animation_umvw8")
+}
 
 [node name="Card" type="Container"]
-offset_left = 470.0
-offset_top = 155.0
-offset_right = 510.0
-offset_bottom = 195.0
+anchors_preset = -1
+anchor_left = 0.454
+anchor_top = 0.091
+anchor_right = 0.454
+anchor_bottom = 0.091
+offset_left = -20.32
+offset_top = -19.72
+offset_right = 19.68
+offset_bottom = 20.28
 script = ExtResource("1_oog31")
 metadata/_edit_group_ = true
 
@@ -18,8 +109,10 @@ metadata/_edit_group_ = true
 texture = ExtResource("2_ggcja")
 
 [node name="Front" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.681642, 0.641093, 0.290635, 1)
 position = Vector2(22, 509)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_eet83")
 offset = Vector2(-22, -509)
 
@@ -30,7 +123,7 @@ texture = ExtResource("4_jksk4")
 offset = Vector2(-17.093, -1.89923)
 
 [node name="RespDer" type="Sprite2D" parent="Front/Content"]
-position = Vector2(953.41, -1006.59)
+position = Vector2(953.41, -506.901)
 scale = Vector2(2.74572, 2.74572)
 texture = ExtResource("5_mxi4i")
 
@@ -53,7 +146,7 @@ text = "Texto textoso que se textea siempre al textear"
 metadata/_edit_use_anchors_ = true
 
 [node name="RespIzq" type="Sprite2D" parent="Front/Content"]
-position = Vector2(-1036.98, -1006.59)
+position = Vector2(-1036.98, -506.901)
 scale = Vector2(2.74572, 2.74572)
 texture = ExtResource("5_mxi4i")
 flip_h = true
@@ -74,3 +167,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 28
 text = "Texto textoso que se textea siempre al textear"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_guj06")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0nrrf")
+}

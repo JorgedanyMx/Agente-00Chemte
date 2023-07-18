@@ -3,7 +3,7 @@ extends Control
 var show_button=false
 var line={}
 var maindata=[]
-var path = "res://data/GGprueba.json"
+var path = "res://data/pruebaChem.json"
 var currentCap=""
 var endHistory=false
 var initialPosition: Vector2
@@ -14,6 +14,8 @@ var deltaPos=Vector2.ZERO
 var leftChoise=false
 var rightChoise=false
 var canSwipe=true
+var checkpoint={}
+var errors=0
 
 func _ready():
 	maindata = Get_data()
@@ -52,6 +54,7 @@ func swipeChoise(delta):
 		deltaPos= (mousePosition - initialMousePosition)  # Sumar el movimiento relativo del mouse a la posición de la carta
 		if(abs(deltaPos.x)<=300):
 			$Panel/currentCard.rotation = (deltaPos.x/300)*.8
+			$Panel/currentCard.dontRotate()
 			$Panel/currentCard.position =	initialPosition + deltaPos
 			if(abs(deltaPos.x)<=100):
 				if(deltaPos.x<-1):
@@ -60,10 +63,8 @@ func swipeChoise(delta):
 				elif(deltaPos.x>1):
 					$Panel/currentCard.changeAlphaIzq(abs(deltaPos.x)/100)
 					$Panel/currentCard.changeAlphaDer(0)
-		
-			
 	else:
-		if(abs(deltaPos.x) >= 100):
+		if(abs(deltaPos.x) >= 200):
 			choiseAnswer(deltaPos.x)
 		# Mover la carta suavemente hacia la posición inicial
 		deltaPos = Vector2.ZERO
@@ -71,7 +72,8 @@ func swipeChoise(delta):
 		$Panel/currentCard.changeAlphaIzq(abs(deltaPos.x)/100)
 		var easeAmount = 10
 		$Panel/currentCard.position += (initialPosition - $Panel/currentCard.position) * easeAmount*delta
-		$Panel/currentCard.rotation += (initialRotation - $Panel/currentCard.rotation) * easeAmount*delta	
+		$Panel/currentCard.rotation += (initialRotation - $Panel/currentCard.rotation) * easeAmount*delta
+		
 
 func choiseAnswer(posx):
 	if(posx>0):
@@ -84,6 +86,7 @@ func choiseAnswer(posx):
 		else:
 			getGuionLine(line["Diálogo A - ID"])
 			print("\n\n Opcion B")
+	$Panel/currentCard.SoundFlip()
 
 #Funcion para obetener el indice
 func findLine(dictionary: Dictionary, key):
@@ -106,10 +109,10 @@ func  Get_data():
 
 	
 func showCard(nextLine):
-	print(nextLine)
 	if(nextLine!=null):
-		$Panel/Dialogo1.text= nextLine["Pregunta"]
-		$Panel/Dialogo2.text= "Personaje: "+ nextLine["Personaje"]
+		var text = nextLine["Personaje"] + ": " +nextLine["Pregunta"]
+		$Panel/Dialogo1.text= nextLine["Personaje"] + ": " +nextLine["Pregunta"]
+		$Panel/Dialogo2.text = ""
 		$Panel/currentCard.flipFront()
 		if nextLine["R A"]!=null:
 			$Panel/currentCard.infoCard(nextLine["R A"],nextLine["R B"],nextLine["Background Color"],nextLine["Imagen URL"])
@@ -119,6 +122,10 @@ func showCard(nextLine):
 			$Panel/currentCard.setImg(nextLine["Imagen URL"])
 		if(nextLine["Background Color"]!=null):
 			pass
+		if(nextLine["IsError"]==false):
+			errors+=1
+		if(nextLine["IsCheckPoint"]==true):
+			checkpoint=nextLine
 	
 func getGuionLine(idxNextLine):
 	var nextLine=findLine(currentCap,idxNextLine)
@@ -126,3 +133,6 @@ func getGuionLine(idxNextLine):
 		nextLine=line
 	line=nextLine
 	showCard(line)
+
+	# Asegurarse de que el visible ratio llegue a 1 al finalizar
+	#nodo.visible_ratio = 1.0

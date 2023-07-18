@@ -18,23 +18,32 @@ func infoCard(resp1,resp2,bgColor, linkImg):
 		setImg(linkImg)
 	if(bgColor!=null):
 		$Front.self_modulate = Color("#"+bgColor)
-		print("Color: #"+bgColor)
 	$Front/Content/RespDer/txtRespDer.text=resp1
-	$Front/Content/RespIzq/txtRespIzq.text=resp2
+	if(resp2!=null):
+		$Front/Content/RespIzq/txtRespIzq.text=resp2
+	else:
+		$Front/Content/RespIzq/txtRespIzq.text=resp1
 
 func flipFront():
-	$Back.visible=false
-	$Front.visible=true
+	$AnimationPlayer.play("FlipFront")
+	var clipAudio=load("res://Audio/Card2.wav");
+	var numeroAleatorio = randf()
+	var randomPich = 0.9 + numeroAleatorio * 0.2
+	print(randomPich)
+	$AudioStreamPlayer.pitch_scale=randomPich
+	$AudioStreamPlayer.stream= load("res://Audio/Card2.wav");
 
 func changeAlphaIzq(alp):
 	var color=$Front/Content/RespIzq.modulate
 	color.a=alp
 	$Front/Content/RespIzq.modulate=color
 	
+	
 func changeAlphaDer(alp):
 	var color=$Front/Content/RespDer.modulate
 	color.a=alp
 	$Front/Content/RespDer.modulate=color
+	
 	
 func flipBack():
 	$Back.visible=true
@@ -46,3 +55,10 @@ func setImg(urlImg):
 func setBgColor(colorS):
 	$Front/Content.self_modulate=Color("#"+colorS)
 	pass
+	
+func dontRotate():
+	$Front/Content/RespDer.global_rotation=0
+	$Front/Content/RespIzq.global_rotation=0
+
+func SoundFlip():
+	$AudioStreamPlayer.play()
