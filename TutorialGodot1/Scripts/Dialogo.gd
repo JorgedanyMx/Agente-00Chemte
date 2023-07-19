@@ -78,14 +78,14 @@ func swipeChoise(delta):
 func choiseAnswer(posx):
 	if(posx<0):
 		getGuionLine(line["Diálogo A - ID"])
-		print("\n\n Opcion A")
+		#print("\n\n Opcion A")
 	else:
 		if line["Diálogo B - ID"]!=null:
-			print("\n\n Opcion B")
+			#print("\n\n Opcion B")
 			getGuionLine(line["Diálogo B - ID"])
 		else:
 			getGuionLine(line["Diálogo A - ID"])
-			print("\n\n Opcion B")
+			#print("\n\n Opcion B")
 	$Panel/currentCard.SoundFlip()
 
 #Funcion para obetener el indice
@@ -113,7 +113,7 @@ func showCard(nextLine):
 		if(nextLine["Personaje"]=="#FINAL"):
 			if(errors==0):
 				getGuionLine(nextLine["Pregunta"])
-			elif(errors==1):
+			elif(errors<3):
 				getGuionLine(nextLine["R A"])
 			else:
 				getGuionLine(nextLine["R B"])
@@ -134,8 +134,9 @@ func loadCard(nextLine):
 		$Panel/currentCard.setImg(nextLine["Imagen URL"])
 	if(nextLine["Background Color"]!=null):
 		pass
-	if(nextLine["IsError"]==false):
+	if(nextLine["IsError"]==true):
 		errors+=1
+		print(errors)
 	if(nextLine["IsCheckPoint"]==true):
 		checkpoint=nextLine
 

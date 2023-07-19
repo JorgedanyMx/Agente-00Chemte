@@ -26,10 +26,8 @@ func infoCard(resp1,resp2,bgColor, linkImg):
 
 func flipFront():
 	$AnimationPlayer.play("FlipFront")
-	var clipAudio=load("res://Audio/Card2.wav");
 	var numeroAleatorio = randf()
 	var randomPich = 0.9 + numeroAleatorio * 0.2
-	print(randomPich)
 	$AudioStreamPlayer.pitch_scale=randomPich
 	$AudioStreamPlayer.stream= load("res://Audio/Card2.wav");
 
