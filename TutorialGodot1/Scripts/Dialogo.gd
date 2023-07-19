@@ -3,7 +3,7 @@ extends Control
 var show_button=false
 var line={}
 var maindata=[]
-var path = "res://data/pruebaChem.json"
+var path = "res://data/GameHistoryCap1.json"
 var currentCap=""
 var endHistory=false
 var initialPosition: Vector2
@@ -76,7 +76,7 @@ func swipeChoise(delta):
 		
 
 func choiseAnswer(posx):
-	if(posx>0):
+	if(posx<0):
 		getGuionLine(line["Diálogo A - ID"])
 		print("\n\n Opcion A")
 	else:
@@ -110,23 +110,35 @@ func  Get_data():
 	
 func showCard(nextLine):
 	if(nextLine!=null):
-		var text = nextLine["Personaje"] + ": " +nextLine["Pregunta"]
-		$Panel/Dialogo1.text= nextLine["Personaje"] + ": " +nextLine["Pregunta"]
-		$Panel/Dialogo2.text = ""
-		$Panel/currentCard.flipFront()
-		if nextLine["R A"]!=null:
-			$Panel/currentCard.infoCard(nextLine["R A"],nextLine["R B"],nextLine["Background Color"],nextLine["Imagen URL"])
+		if(nextLine["Personaje"]=="#FINAL"):
+			if(errors==0):
+				getGuionLine(nextLine["Pregunta"])
+			elif(errors==1):
+				getGuionLine(nextLine["R A"])
+			else:
+				getGuionLine(nextLine["R B"])
+			#getGuionLine
 		else:
-			$Panel/currentCard.infoCard("mmm...","mmm...",nextLine["Background Color"],nextLine["Imagen URL"])
-		if(nextLine["Imagen URL"]!=null):
-			$Panel/currentCard.setImg(nextLine["Imagen URL"])
-		if(nextLine["Background Color"]!=null):
-			pass
-		if(nextLine["IsError"]==false):
-			errors+=1
-		if(nextLine["IsCheckPoint"]==true):
-			checkpoint=nextLine
-	
+			loadCard(nextLine)
+
+func loadCard(nextLine):
+	var text = nextLine["Personaje"] + ": " +nextLine["Pregunta"]
+	$Panel/Dialogo1.text= nextLine["Personaje"] + ": " +nextLine["Pregunta"]
+	$Panel/Dialogo2.text = ""
+	$Panel/currentCard.flipFront()
+	if nextLine["R A"]!=null:
+		$Panel/currentCard.infoCard(nextLine["R A"],nextLine["R B"],nextLine["Background Color"],nextLine["Imagen URL"])
+	else:
+		$Panel/currentCard.infoCard("mmm...","mmm...",nextLine["Background Color"],nextLine["Imagen URL"])
+	if(nextLine["Imagen URL"]!=null):
+		$Panel/currentCard.setImg(nextLine["Imagen URL"])
+	if(nextLine["Background Color"]!=null):
+		pass
+	if(nextLine["IsError"]==false):
+		errors+=1
+	if(nextLine["IsCheckPoint"]==true):
+		checkpoint=nextLine
+
 func getGuionLine(idxNextLine):
 	var nextLine=findLine(currentCap,idxNextLine)
 	if( nextLine==null or nextLine["Pregunta"]==null):
