@@ -30,7 +30,9 @@ func flipFront():
 	var randomPich = 0.9 + numeroAleatorio * 0.2
 	$AudioStreamPlayer.pitch_scale=randomPich
 	$AudioStreamPlayer.stream= load("res://Audio/Card2.wav");
-
+	$Front/Content/RespDer.visible=true
+	$Front/Content/RespIzq.visible=true
+	
 func changeAlphaIzq(alp):
 	var color=$Front/Content/RespIzq.modulate
 	color.a=alp
@@ -59,4 +61,4 @@ func dontRotate():
 	$Front/Content/RespIzq.global_rotation=0
 
 func SoundFlip():
-	$AudioStreamPlayer.play()
+	$AudioStreamPlayer.play()	

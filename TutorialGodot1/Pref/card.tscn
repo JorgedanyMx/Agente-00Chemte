@@ -85,6 +85,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1e-05, 1e-05)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Front/Content/RespDer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Front/Content/RespIzq:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0nrrf"]
 _data = {
@@ -100,8 +124,8 @@ anchor_right = 0.454
 anchor_bottom = 0.091
 offset_left = -20.32
 offset_top = -19.72
-offset_right = 19.68
-offset_bottom = 20.28
+offset_right = 19.6922
+offset_bottom = 20.2807
 script = ExtResource("1_oog31")
 metadata/_edit_group_ = true
 
@@ -123,6 +147,7 @@ texture = ExtResource("4_jksk4")
 offset = Vector2(-17.093, -1.89923)
 
 [node name="RespDer" type="Sprite2D" parent="Front/Content"]
+visible = false
 position = Vector2(953.41, -506.901)
 scale = Vector2(2.74572, 2.74572)
 texture = ExtResource("5_mxi4i")
@@ -146,6 +171,7 @@ text = "Texto textoso que se textea siempre al textear"
 metadata/_edit_use_anchors_ = true
 
 [node name="RespIzq" type="Sprite2D" parent="Front/Content"]
+visible = false
 position = Vector2(-1036.98, -506.901)
 scale = Vector2(2.74572, 2.74572)
 texture = ExtResource("5_mxi4i")
