@@ -46,7 +46,7 @@ func _input(event):
 func _process(delta):
 	if(!endHistory):
 		if (Input.is_action_just_pressed("ui_left")):
-			pass
+			getGuionLine("53")
 		if (Input.is_action_just_pressed("ui_right")):
 			pass
 	if(canSwipe):
@@ -113,7 +113,6 @@ func choiseAnswer(posx):
 		getGuionLine(line["Diálogo A - ID"])
 		isFall=true
 		leftfall=true
-		
 		#print("\n\n Opcion A")
 	else:
 		isFall=true
@@ -151,11 +150,17 @@ func showCard(nextLine):
 	if(nextLine!=null):
 		if(nextLine["Personaje"]=="#FINAL"):
 			if(errors==0):
-				getGuionLine(nextLine["Pregunta"])
+				var idx=""+str(nextLine["Pregunta"])
+				getGuionLine(idx)
+				loadCard(line)
 			elif(errors<3):
-				getGuionLine(nextLine["R A"])
+				var idx=""+str(nextLine["R A"])
+				getGuionLine(idx)
+				loadCard(line)
 			else:
-				getGuionLine(nextLine["R B"])
+				var idx=""+str(nextLine["R B"])
+				getGuionLine(idx)
+				loadCard(line)
 			#getGuionLine
 		else:
 			loadCard(nextLine)
