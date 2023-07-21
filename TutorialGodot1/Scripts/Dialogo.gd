@@ -46,7 +46,8 @@ func _input(event):
 func _process(delta):
 	if(!endHistory):
 		if (Input.is_action_just_pressed("ui_left")):
-			getGuionLine("53")
+#########################################################CHECKPOINT################################
+			getGuionLine("53")							#Checkpoint manual
 		if (Input.is_action_just_pressed("ui_right")):
 			pass
 	if(canSwipe):
@@ -166,20 +167,32 @@ func showCard(nextLine):
 			loadCard(nextLine)
 
 func loadCard(nextLine):
-	var text = nextLine["Personaje"] + ": " +nextLine["Pregunta"]
-	$Panel/Dialogo1.text= nextLine["Personaje"] + ": " +nextLine["Pregunta"]
-	$Panel/Dialogo2.text = ""
-	$Panel/Dialogo1/DiagAnim.play("Historia")
-	$Panel/Dialogo1/DiagAnim.speed_scale=(100.0/len(text))
+	#[color=#000000] adsadjk
+	var text = "[color=#000000]"+nextLine["Personaje"]+"[/color] " + ": " +nextLine["Pregunta"]
+	if(nextLine["Personaje"]=="Narración"):
+		$Panel/Dialogo1.text= ""
+		$Panel/Tablero.color="#271919"
+		$Panel/Tablero/Chem.visible=false
+		$Panel/currentCard.showNarrativa(nextLine["Pregunta"])
+	else:
+		$Panel/Dialogo1.text= text
+		$Panel/Tablero/Chem.visible=true
+		$Panel/Tablero.color="#5c4141"
+		if(nextLine["Imagen URL"]!=null):
+			$Panel/currentCard.setImg(nextLine["Imagen URL"])
+			$Panel/Dialogo1/DiagAnim.play("Historia")
+			$Panel/Dialogo1/DiagAnim.speed_scale=(100.0/len(text))
+		if(nextLine["Background Color"]!=null):
+			$Panel/currentCard.setBgColor(nextLine["Background Color"])
+	#$Panel/Dialogo2.text = ""
+	
 	$Panel/currentCard.flipFront()
 	if nextLine["R A"]!=null:
-		$Panel/currentCard.infoCard(nextLine["R A"],nextLine["R B"],nextLine["Background Color"],nextLine["Imagen URL"])
+		$Panel/currentCard.infoCard(nextLine["R A"],nextLine["R B"])
 	else:
-		$Panel/currentCard.infoCard("mmm...","mmm...",nextLine["Background Color"],nextLine["Imagen URL"])
-	if(nextLine["Imagen URL"]!=null):
-		$Panel/currentCard.setImg(nextLine["Imagen URL"])
-	if(nextLine["Background Color"]!=null):
-		pass
+		$Panel/currentCard.infoCard("mmm...","mmm...")
+
+
 	if(nextLine["IsError"]==true):
 		errors+=1
 	if(nextLine["IsCheckPoint"]==true):

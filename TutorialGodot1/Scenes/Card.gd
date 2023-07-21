@@ -11,18 +11,18 @@ func _ready():
 	changeAlphaDer(0)
 	changeAlphaIzq(0)
 
-func infoCard(resp1,resp2,bgColor, linkImg):
+func infoCard(resp1,resp2):
 	changeAlphaIzq(1)
 	changeAlphaDer(1)
-	if(linkImg!=null):
-		setImg(linkImg)
-	if(bgColor!=null):
-		$Front.self_modulate = Color("#"+bgColor)
 	$Front/Content/RespDer/txtRespDer.text=resp1
 	if(resp2!=null):
 		$Front/Content/RespIzq/txtRespIzq.text=resp2
 	else:
 		$Front/Content/RespIzq/txtRespIzq.text=resp1
+
+func setBgColor(bgColor):
+	if(bgColor!=null):
+		$Front.self_modulate = Color("#"+bgColor)
 
 func flipFront():
 	$AnimationPlayer.play("FlipFront")
@@ -50,15 +50,18 @@ func flipBack():
 	$Front.visible=false
 	
 func setImg(urlImg):
+	$Front/Narrativa.text=""
+	$Front/Content.visible=true
 	$Front/Content.texture=load("res://Sprites/"+urlImg) as Texture 
-
-func setBgColor(colorS):
-	$Front/Content.self_modulate=Color("#"+colorS)
-	pass
 	
 func dontRotate():
 	$Front/Content/RespDer.global_rotation=0
 	$Front/Content/RespIzq.global_rotation=0
 
 func SoundFlip():
-	$AudioStreamPlayer.play()	
+	$AudioStreamPlayer.play()
+
+func showNarrativa(textL):
+	$Front/Content.visible=false
+	$Front.self_modulate = Color("#d1cdc4")
+	$Front/Narrativa.text="[center]"+textL+ "[/center]"

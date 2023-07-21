@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6r0vvcejbthb"]
+[gd_scene load_steps=21 format=3 uid="uid://c6r0vvcejbthb"]
 
 [ext_resource type="Script" path="res://Scripts/cvstest.gd" id="1_fdyoq"]
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://vufehw05hny4" path="res://Sprites/Pressed.png" id="7_hucs5"]
 [ext_resource type="Texture2D" uid="uid://dbdwtxvf8qgx6" path="res://Sprites/hover.png" id="8_krfug"]
 [ext_resource type="Script" path="res://Scenes/MenuControl.gd" id="10_phr34"]
+[ext_resource type="Texture2D" uid="uid://b3ewucjnnkfns" path="res://Sprites/chem.png" id="13_fdgqv"]
 [ext_resource type="Texture2D" uid="uid://bvb2428svbo8p" path="res://arrow.png" id="13_wdhn0"]
 
 [sub_resource type="Animation" id="Animation_5vsnk"]
@@ -147,6 +148,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.360784, 0.254902, 0.254902, 1)
 
+[node name="Chem" type="Sprite2D" parent="Game/Panel/Tablero"]
+position = Vector2(129, 182)
+scale = Vector2(0.190191, 0.190191)
+texture = ExtResource("13_fdgqv")
+
 [node name="Cartas" type="ColorRect" parent="Game/Panel"]
 layout_mode = 1
 anchors_preset = -1
@@ -165,8 +171,13 @@ anchor_left = 0.02
 anchor_top = 0.02
 anchor_right = 0.98
 anchor_bottom = 0.195
+offset_left = 296.4
+offset_top = -0.48
+offset_right = -0.400024
+offset_bottom = -0.679993
 theme_override_fonts/normal_font = ExtResource("3_m4qun")
 theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
 text = "[color=#000000] adsadjk[/color] ashdkashjkhkjhasjkhdjksah djkashdkjashkjdhaskjdhaskjhds sad asd sad asd sad asd asd sd as dsad sadsadasm febbkjhh kja hdkah jk khwklj hkjhs jkhd jkash  jkdhw jkah kjdhsajkh djkash "
 scroll_active = false
 shortcut_keys_enabled = false
@@ -195,7 +206,6 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("3_g8x8e")
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "[color=#000000] adsadjk[/color] ashdkashjkhkjhasjkhdjksah djkashdkjashkjdhaskjdhaskjhds sad asd sad asd sad asd asd sd as dsad sadsadasm febbkjhh kja hdkah jk khwklj hkjhs jkhd jkash  jkdhw jkah kjdhsajkh djkash "
 scroll_active = false
 text_direction = 3
 
