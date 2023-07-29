@@ -1,6 +1,8 @@
 extends Control
 
 var audioBus = AudioServer.get_bus_index("Master")
+var pressed=false
+var initialMousePosition
 
 
 func _on_vol_slider_value_changed(value):
@@ -16,3 +18,19 @@ func _on_vol_slider_value_changed(value):
 
 func _on_salir_pressed():
 	get_tree().quit()
+
+
+func _on_mouse_entered():
+	print("AAA")
+	if(pressed):
+		print("BBBB")
+	pass # Replace with function body.
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:  # Se presionó el botón izquierdo del mouse
+				pressed = true
+				initialMousePosition= get_local_mouse_position()
+			else:  # Se soltó el botón izquierdo del mouse
+				pressed = false

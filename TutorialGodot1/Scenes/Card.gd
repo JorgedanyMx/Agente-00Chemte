@@ -6,12 +6,15 @@ var linkChar = ""
 var bgCikir = ""
 var resIzq = ""
 var resDer = ""
+var pensamientosCard = load("res://Sprites/Game/Narrativa.png")
+var cardBg =load("res://Sprites/Game/cartaupd.png")
 
 func _ready():
 	changeAlphaDer(0)
 	changeAlphaIzq(0)
 
 func infoCard(resp1,resp2):
+	#$Front.texture=cardBg as Texture 
 	changeAlphaIzq(1)
 	changeAlphaDer(1)
 	$Front/Content/RespDer/txtRespDer.text=resp1
@@ -52,7 +55,10 @@ func flipBack():
 func setImg(urlImg):
 	$Front/Narrativa.text=""
 	$Front/Content.visible=true
-	$Front/Content.texture=load("res://Sprites/"+urlImg) as Texture 
+	
+	var imgNew=load("res://Sprites/"+urlImg)
+	if(imgNew!=null):
+		$Front/Content.texture=load("res://Sprites/"+urlImg) as Texture 
 	
 func dontRotate():
 	$Front/Content/RespDer.global_rotation=0
@@ -62,6 +68,13 @@ func SoundFlip():
 	$AudioStreamPlayer.play()
 
 func showNarrativa(textL):
+	Pensamientos()
 	$Front/Content.visible=false
-	$Front.self_modulate = Color("#d1cdc4")
+	#$Front.self_modulate = Color("#d1cdc4")
 	$Front/Narrativa.text="[center]"+textL+ "[/center]"
+
+func Pensamientos():
+	$Front.texture=pensamientosCard as Texture 
+
+func imgCard():
+	$Front.texture=cardBg as Texture 

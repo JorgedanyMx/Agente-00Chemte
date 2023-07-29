@@ -1,10 +1,10 @@
 extends Control
 
 var isPause=false
-
-
+var telonDown=load("res://Audio/TelonDown.wav")
+var menuUP = load("res://Audio/menuSube.wav")
 func _ready():
-	$Menu.visible=false
+	$Menu.visible=true
 
 func _on_btn_menu_pressed():
 	isPause=true
@@ -21,22 +21,14 @@ func swPause():
 	$Menu/AudioMenu.pitch_scale=randomPich
 	if (isPause):
 		$"../Game".swPause(true)
-		var clipSound=load("res://Audio/TelonDown.wav")
-		$Menu/AudioMenu.stream=clipSound
+		$Menu/AudioMenu.stream=telonDown
 		$Menu/AudioMenu.play()
-		$Menu.visible=true
-		$HUD.visible=false
 		$Menu/MenuAnim.play("OpenMenu")
 	else:
 		$Menu/MenuAnim.play("CloseMenu")
-		var clipSound = load("res://Audio/TelonUP.wav")
-		$Menu/AudioMenu.stream=clipSound
+		$Menu/AudioMenu.stream=menuUP
 		$Menu/AudioMenu.play()
 		$"../Game".swPause(false)
-		#$Menu.visible=false
-		$HUD.visible=true
-		
-
 func _on_continuar_pressed():
 	isPause=false
 	swPause()

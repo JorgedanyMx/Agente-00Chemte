@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bogmqbat6i0l3"]
+[gd_scene load_steps=11 format=3 uid="uid://cejykutun8cyu"]
 
 [ext_resource type="Script" path="res://Scenes/Card.gd" id="1_oog31"]
-[ext_resource type="Texture2D" uid="uid://bfj2v0pxdlmfx" path="res://Sprites/back.png" id="2_ggcja"]
-[ext_resource type="Texture2D" uid="uid://ci4dp60gby8cq" path="res://Sprites/CardBG.png" id="3_eet83"]
+[ext_resource type="Texture2D" uid="uid://cotnkbcgdqjjq" path="res://Sprites/Game/BgCard.png" id="2_k7gdx"]
+[ext_resource type="Texture2D" uid="uid://di7xeo185hnnk" path="res://Sprites/Game/cartaupd.png" id="3_2380x"]
 [ext_resource type="Texture2D" uid="uid://b3ewucjnnkfns" path="res://Sprites/chem.png" id="4_jksk4"]
-[ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Dialogo.png" id="5_mxi4i"]
+[ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Game/Dialogo.png" id="5_1gufe"]
+[ext_resource type="FontFile" uid="uid://ceot41yfkopgt" path="res://Fonts/LT Crafted.otf" id="6_6qp5h"]
 [ext_resource type="AudioStream" uid="uid://r6yayuskobmm" path="res://Audio/Aire1.wav" id="6_guj06"]
 
 [sub_resource type="Animation" id="Animation_gbn6c"]
@@ -130,27 +131,27 @@ script = ExtResource("1_oog31")
 metadata/_edit_group_ = true
 
 [node name="Back" type="Sprite2D" parent="."]
-texture = ExtResource("2_ggcja")
+texture = ExtResource("2_k7gdx")
 
 [node name="Front" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(0.862745, 0.85098, 0.823529, 1)
 position = Vector2(22, 509)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_eet83")
+texture = ExtResource("3_2380x")
 offset = Vector2(-22, -509)
 
 [node name="Content" type="Sprite2D" parent="Front"]
 position = Vector2(0, -509)
-scale = Vector2(0.461982, 0.579136)
+scale = Vector2(0.231, 0.29)
 texture = ExtResource("4_jksk4")
 offset = Vector2(-17.093, -1.89923)
 
 [node name="RespDer" type="Sprite2D" parent="Front/Content"]
 visible = false
 position = Vector2(953.41, -506.901)
-scale = Vector2(2.74572, 2.74572)
-texture = ExtResource("5_mxi4i")
+scale = Vector2(1.373, 1.373)
+texture = ExtResource("5_1gufe")
 
 [node name="txtRespDer" type="RichTextLabel" parent="Front/Content/RespDer"]
 anchors_preset = -1
@@ -173,8 +174,8 @@ metadata/_edit_use_anchors_ = true
 [node name="RespIzq" type="Sprite2D" parent="Front/Content"]
 visible = false
 position = Vector2(-1036.98, -506.901)
-scale = Vector2(2.74572, 2.74572)
-texture = ExtResource("5_mxi4i")
+scale = Vector2(1.373, 1.373)
+texture = ExtResource("5_1gufe")
 flip_h = true
 
 [node name="txtRespIzq" type="RichTextLabel" parent="Front/Content/RespIzq"]
@@ -198,15 +199,18 @@ text = "Texto textoso que se textea siempre al textear"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -441.0
-offset_top = -724.0
-offset_right = -587.0
-offset_bottom = -1122.0
+offset_left = -232.0
+offset_top = -651.0
+offset_right = 98.0
+offset_bottom = -441.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+scale = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0.615686, 0.615686, 0.529412, 1)
+theme_override_colors/font_outline_color = Color(0.270588, 0.270588, 0.215686, 1)
 theme_override_constants/outline_size = 20
-theme_override_font_sizes/normal_font_size = 34
+theme_override_fonts/normal_font = ExtResource("6_6qp5h")
+theme_override_font_sizes/normal_font_size = 44
 bbcode_enabled = true
 text = "asdasdasddsadsadasd
 sad
