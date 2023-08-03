@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2hrnisjo0dqa"]
 
 [ext_resource type="PackedScene" uid="uid://c8mhfndoft41d" path="res://Scenes/card.tscn" id="1_obtrs"]
-[ext_resource type="Texture2D" uid="uid://b080qufyf6kmh" path="res://Sprites/Cap1/Chemtective1.png" id="2_mrykm"]
+[ext_resource type="Texture2D" uid="uid://cg47l6uud56nv" path="res://Sprites/Cap1/Chemtective1.png" id="2_mrykm"]
 
 [node name="2dScene" type="Node2D"]
 

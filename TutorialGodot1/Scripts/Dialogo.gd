@@ -229,7 +229,14 @@ func loadCard(nextLine):
 		checkpoint=nextLine
 
 func getGuionLine(idxNextLine):
-	var nextLine=findLine(currentCap,idxNextLine)
+	var nextLine;
+	
+	if(idxNextLine in maindata):
+		currentCap = maindata[idxNextLine]
+		nextLine=findLine(currentCap,"2")
+	else:
+		nextLine=findLine(currentCap,idxNextLine)
+	
 	if( nextLine==null or nextLine["Pregunta"]==null):
 		nextLine=line
 	line=nextLine

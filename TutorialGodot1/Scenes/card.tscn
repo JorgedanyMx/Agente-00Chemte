@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c8mhfndoft41d"]
 
 [ext_resource type="Script" path="res://Scenes/Card.gd" id="1_j7sfy"]
-[ext_resource type="Texture2D" uid="uid://bfj2v0pxdlmfx" path="res://Sprites/back.png" id="2_3d6im"]
+[ext_resource type="Texture2D" uid="uid://cob1fus33ia5b" path="res://Sprites/back.png" id="2_3d6im"]
 [ext_resource type="Texture2D" uid="uid://ci4dp60gby8cq" path="res://Sprites/CardBG.png" id="3_cs51s"]
 [ext_resource type="Texture2D" uid="uid://b3ewucjnnkfns" path="res://Sprites/chem.png" id="4_xd4t2"]
 [ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Game/Dialogo.png" id="5_lpp6b"]
