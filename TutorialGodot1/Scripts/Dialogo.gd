@@ -241,8 +241,7 @@ func swPause(pauseFlag):
 func _on_resized():
 	var newSize =get_window().size
 	perSizey = newSize[1]/1080.0
-	print(perSizey)
-
+	initialPosition=$Panel/bankCard.position
 
 func _on_chemtective_resized():
 	pass # Replace with function body.
