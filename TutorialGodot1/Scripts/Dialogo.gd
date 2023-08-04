@@ -27,6 +27,7 @@ func _ready():
 	
 	maindata = Get_data()
 	currentCap=maindata[maindata.keys()[0]]
+	#currentCap=maindata[maindata.keys()[7]]
 	print(maindata.keys())
 	#print(currentCap)
 	line=currentCap["2"]
@@ -234,6 +235,7 @@ func getGuionLine(idxNextLine):
 	if(idxNextLine in maindata):
 		currentCap = maindata[idxNextLine]
 		nextLine=findLine(currentCap,"2")
+		errors = 0;
 	else:
 		nextLine=findLine(currentCap,idxNextLine)
 	
