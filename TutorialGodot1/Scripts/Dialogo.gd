@@ -27,7 +27,7 @@ func _ready():
 	
 	maindata = Get_data()
 	currentCap=maindata[maindata.keys()[0]]
-	#currentCap=maindata[maindata.keys()[7]]
+	#currentCap=maindata[maindata.keys()[8]]
 	print(maindata.keys())
 	#print(currentCap)
 	line=currentCap["2"]
