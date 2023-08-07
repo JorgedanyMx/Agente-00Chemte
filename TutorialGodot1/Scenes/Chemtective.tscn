@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dagygwqcpjahy"]
+[gd_scene load_steps=22 format=3 uid="uid://dagygwqcpjahy"]
 
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
 [ext_resource type="FontFile" uid="uid://cuvbydnpy5d32" path="res://Fonts/Planet Comic.otf" id="3_g8x8e"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/UIControl.gd" id="6_uip2p"]
 [ext_resource type="Script" path="res://Scenes/MenuControl.gd" id="10_phr34"]
 [ext_resource type="Texture2D" uid="uid://c4xh5v7wkouf" path="res://Sprites/Dialogo1.png" id="10_wuvqn"]
+[ext_resource type="Texture2D" uid="uid://dus17qs5fmeb8" path="res://Sprites/Game/pantallas/ajustes/Slider.png" id="12_qg823"]
 [ext_resource type="Texture2D" uid="uid://opgmi58801bc" path="res://Sprites/Menu.png" id="13_43ea1"]
 
 [sub_resource type="Animation" id="Animation_5vsnk"]
@@ -47,6 +48,15 @@ _data = {
 "Historia": SubResource("Animation_5vsnk"),
 "RESET": SubResource("Animation_08jib")
 }
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_k356h"]
+content_margin_left = 24.0
+color = Color(0.34902, 0.305882, 0.25098, 1)
+thickness = 40
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fl7k8"]
+color = Color(0.956863, 0.921569, 0.843137, 1)
+thickness = 40
 
 [sub_resource type="Animation" id="Animation_7cyjn"]
 resource_name = "CloseMenu"
@@ -428,6 +438,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VolText" type="RichTextLabel" parent="IU/Menu/ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 138.0
+offset_top = 745.0
+offset_right = -329.0
+offset_bottom = -1047.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.956863, 0.894118, 0.764706, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.105882, 0.0627451, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("3_m4qun")
+theme_override_font_sizes/normal_font_size = 80
+text = "Volumen "
+
+[node name="volSlider" type="HSlider" parent="IU/Menu/ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.388
+anchor_right = 0.856
+anchor_bottom = 0.557
+offset_left = 15.0
+offset_top = 0.039978
+offset_right = 347.52
+offset_bottom = 140.56
+scale = Vector2(0.696998, 0.696998)
+theme_override_constants/grabber_offset = 0
+theme_override_icons/grabber = ExtResource("12_qg823")
+theme_override_icons/grabber_highlight = ExtResource("12_qg823")
+theme_override_styles/slider = SubResource("StyleBoxLine_k356h")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_fl7k8")
+value = 50.0
+
 [node name="MenuText" type="RichTextLabel" parent="IU/Menu/ColorRect/Panel"]
 clip_contents = false
 layout_mode = 1
@@ -453,43 +500,6 @@ shortcut_keys_enabled = false
 meta_underlined = false
 hint_underlined = false
 text_direction = 3
-
-[node name="VolumenPanel" type="Panel" parent="IU/Menu/ColorRect/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.331
-anchor_right = 0.7
-anchor_bottom = 0.431
-offset_top = 0.479919
-offset_right = -6.10352e-05
-offset_bottom = 0.47998
-
-[node name="VolText" type="RichTextLabel" parent="IU/Menu/ColorRect/Panel/VolumenPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 136.0
-offset_top = 55.0
-offset_right = -119.0
-offset_bottom = -79.0
-theme_override_fonts/normal_font = ExtResource("3_m4qun")
-theme_override_font_sizes/normal_font_size = 34
-text = "Volumen "
-
-[node name="volSlider" type="HSlider" parent="IU/Menu/ColorRect/Panel/VolumenPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.568
-anchor_right = 0.9
-anchor_bottom = 0.9
-offset_left = -0.200001
-offset_top = -0.0559998
-offset_right = 0.199982
-offset_bottom = 0.200012
-value = 100.0
 
 [node name="Salir" type="Button" parent="IU/Menu/ColorRect/Panel"]
 layout_mode = 1
@@ -542,7 +552,7 @@ libraries = {
 }
 
 [connection signal="resized" from="Game" to="Game" method="_on_resized"]
-[connection signal="value_changed" from="IU/Menu/ColorRect/Panel/VolumenPanel/volSlider" to="IU/Menu" method="_on_vol_slider_value_changed"]
+[connection signal="value_changed" from="IU/Menu/ColorRect/Panel/volSlider" to="IU/Menu" method="_on_vol_slider_value_changed"]
 [connection signal="pressed" from="IU/Menu/ColorRect/Panel/Salir" to="IU/Menu" method="_on_salir_pressed"]
 
 [editable path="Game/Panel/currentCard"]

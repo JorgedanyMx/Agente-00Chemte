@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc1eh7jauv2qy"
-path="res://.godot/imported/ejemplo_pinturas.png-4270358aa9e8480cc1377ab831ef9c5b.ctex"
+uid="uid://ch6b1gmh6xdik"
+path="res://.godot/imported/Sliderbg1.png-d5951030bdb5f5661f776b6fc1bd3388.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Game/pintura/ejemplo_pinturas.png"
-dest_files=["res://.godot/imported/ejemplo_pinturas.png-4270358aa9e8480cc1377ab831ef9c5b.ctex"]
+source_file="res://Sprites/Game/pantallas/ajustes/Sliderbg1.png"
+dest_files=["res://.godot/imported/Sliderbg1.png-d5951030bdb5f5661f776b6fc1bd3388.ctex"]
 
 [params]
 

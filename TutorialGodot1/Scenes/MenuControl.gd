@@ -7,7 +7,7 @@ var initialMousePosition
 
 func _on_vol_slider_value_changed(value):
 	var bus_idx= AudioServer.get_bus_index("Master")
-	if(value>$ColorRect/Panel/VolumenPanel/volSlider.min_value ):
+	if(value>$ColorRect/Panel/volSlider.min_value ):
 		var dbValue = 20.0 * log(value/100)
 		AudioServer.set_bus_mute(bus_idx,false)
 		AudioServer.set_bus_volume_db(bus_idx,dbValue)
