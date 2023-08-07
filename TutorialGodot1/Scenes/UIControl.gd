@@ -5,7 +5,10 @@ var telonDown=load("res://Audio/TelonDown.wav")
 var menuUP = load("res://Audio/menuSube.wav")
 func _ready():
 	$Menu.visible=true
-
+	var gameNode = get_node("../Game")
+	gameNode.OpenMenu.connect(OpenMenu)
+	gameNode.CloseMenu.connect(CLoseMenu)
+	
 func _on_btn_menu_pressed():
 	isPause=true
 	swPause()
@@ -30,5 +33,12 @@ func swPause():
 		$Menu/AudioMenu.play()
 		$"../Game".swPause(false)
 func _on_continuar_pressed():
+	isPause=true
+	swPause()
+	
+func OpenMenu():
+	isPause=true
+	swPause()
+func CLoseMenu():
 	isPause=false
 	swPause()

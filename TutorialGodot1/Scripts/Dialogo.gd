@@ -1,13 +1,27 @@
 extends Control
 
+signal OpenMenu
+signal CloseMenu
+
+enum MenuStates{MENUCLOSE, MENUOPEN, MENUOPENING, MENUCLOSING}
+var menuS = MenuStates.MENUCLOSE
+var menuPrev = MenuStates.MENUCLOSE 
+
 var show_button=false
 var canSwipe=true
 var endHistory=false
 var pressed = false
+var cardPressed=false
+var MenuOpened=false 
+var MenuClosed=false 
+var isMenu =false
+var changeMenu=false
+
 var leftChoise=false
 var rightChoise=false
 var leftfall=true
 var isFall=false
+
 var line={}
 var maindata=[]
 var path = "res://data/Agente 00Cheemte.json"
@@ -20,14 +34,14 @@ var errors=0
 var initialRotation
 var gameSize =null
 var perSizey =1
+var perSizeX= 1
+var timerMenuVar=0.0
 
 
 func _ready():
 	gameSize =get_window().size
-	
 	maindata = Get_data()
 	currentCap=maindata[maindata.keys()[0]]
-	#currentCap=maindata[maindata.keys()[8]]
 	print(maindata.keys())
 	#print(currentCap)
 	line=currentCap["2"]
@@ -44,23 +58,90 @@ func _input(event):
 		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:  # Se presionó el botón izquierdo del mouse
-				pressed = true
-				initialMousePosition= get_local_mouse_position()
-				print(get_global_mouse_position())
+				initialMousePosition= get_global_mouse_position()
+				knowPressed(initialMousePosition)
 			else:  # Se soltó el botón izquierdo del mouse
 				pressed = false
+				MenuOpened=false
+				MenuClosed=false 
+
+func knowPressed(inPos):
+	var currentVpos = get_viewport().get_visible_rect().size.y
+	if(currentVpos<=0): currentVpos=1
+	
+	var perceScreen= inPos.y/(float(currentVpos))
+	if(perceScreen<.17 and not isMenu):
+		MenuOpened=true
+	elif (perceScreen>.90 and isMenu):
+		MenuClosed=true
+	else:
+		pressed = true
 
 func _process(delta):
+	MenuUpdater(delta)
 	if(!endHistory):
 		if (Input.is_action_just_pressed("ui_left")):
 #########################################################CHECKPOINT################################
 			getGuionLine("53")							#Checkpoint manual
+			errors=2
 		if (Input.is_action_just_pressed("ui_right")):
 			pass
 	if(canSwipe):
 		swipeChoise(delta)
 	fallCard(delta)
+	MenuManager(delta)
+	menuPrev = menuS
+
+func MenuUpdater(delta):
+	if (timerMenuVar>=0):
+		timerMenuVar-=delta
 	
+func MenuManager(delta):
+	
+	if(timerMenuDone()):
+	#var a =false
+	#if(a):
+		match menuS:
+			MenuStates.MENUCLOSE:
+				if(MenuOpened):	#Si se presiona el menu abierto lo sigue
+					var mousePosition = get_global_mouse_position()
+					deltaPos= (mousePosition - initialMousePosition)  # Sumar el movimiento relativo del mouse a la posición de la carta
+					deltaPos.x=0
+					deltaPos.y=clamp(deltaPos.y,0,200)
+					$"../IU/Menu".position.y=$"../IU/Menu2".position.y+deltaPos.y
+				else:
+					if(abs($"../IU/Menu2".position.y-$"../IU/Menu".position.y)>150):
+						menuS=MenuStates.MENUOPENING
+						isMenu=true
+						emit_signal("OpenMenu")
+						startTimerMenu(.4)
+					else:
+						var easeAmount = 10
+						if(!isFall):
+							$"../IU/Menu".position += ($"../IU/Menu2".position - $"../IU/Menu".position) * easeAmount*delta
+			MenuStates.MENUOPEN:
+				if(MenuClosed):
+					var mousePosition = get_global_mouse_position()
+					deltaPos= (mousePosition - initialMousePosition)  # Sumar el movimiento relativo del mouse a la posición de la carta
+					deltaPos.x=0
+					deltaPos.y=clamp(deltaPos.y,-200,0)
+					$"../IU/Menu".position.y=deltaPos.y
+				else:
+					if(abs($"../IU/Menu".position.y)>150):
+						menuS = MenuStates.MENUCLOSING
+						isMenu=false
+						emit_signal("CloseMenu")
+						startTimerMenu(.4)
+					else:
+						var easeAmount = 10
+						if(!isFall):
+							$"../IU/Menu".position += (Vector2.ZERO - $"../IU/Menu".position) * easeAmount*delta
+			MenuStates.MENUCLOSING:
+				$"../IU/Menu".position=$"../IU/Menu2".position
+				menuS=MenuStates.MENUCLOSE
+			MenuStates.MENUOPENING:
+				menuS=MenuStates.MENUOPEN
+
 
 func fallCard(deltaTime):
 	if(isFall):
@@ -83,9 +164,10 @@ func fallCard(deltaTime):
 			showCard(line)
 			$Panel/currentCard.visible=true
 			$Panel/currentCard.SoundFlip()
+
 func swipeChoise(delta):
 	if (pressed and !isFall):
-		var mousePosition = get_local_mouse_position()
+		var mousePosition = get_global_mouse_position()
 		deltaPos= (mousePosition - initialMousePosition)  # Sumar el movimiento relativo del mouse a la posición de la carta
 		deltaPos.x=clamp(deltaPos.x,-299,299)
 		deltaPos.y=clamp(deltaPos.y,-200,200)
@@ -113,8 +195,9 @@ func swipeChoise(delta):
 						$Panel/DialogResp/Respuesta.text=str(line["R A"])
 					$Panel/DialogResp/Respuesta.visible_ratio=abs(deltaPos.x)/100.0
 	else:
-		if(abs(deltaPos.x) >= 200.0):
+		if(abs(deltaPos.x) >= 200.0 and not MenuClosed and not MenuOpened):
 			choiseAnswer(deltaPos.x)
+			print(errors)
 		# Mover la carta suavemente hacia la posición inicial
 		deltaPos = Vector2.ZERO
 		$Panel/currentCard.changeAlphaDer(abs(deltaPos.x)/100)
@@ -123,7 +206,6 @@ func swipeChoise(delta):
 		if(!isFall):
 			$Panel/currentCard.position += (initialPosition - $Panel/currentCard.position) * easeAmount*delta
 			$Panel/currentCard.rotation += (initialRotation - $Panel/currentCard.rotation) * easeAmount*delta
-		
 
 func choiseAnswer(posx):
 	var numeroAleatorio = randf()
@@ -170,6 +252,7 @@ func  Get_data():
 func showCard(nextLine):
 	if(nextLine!=null):
 		if(nextLine["Personaje"]=="#FINAL"):
+			print("final!")
 			if(errors==0):
 				var idx=""+str(nextLine["Pregunta"])
 				getGuionLine(idx)
@@ -238,7 +321,6 @@ func getGuionLine(idxNextLine):
 		errors = 0;
 	else:
 		nextLine=findLine(currentCap,idxNextLine)
-	
 	if( nextLine==null or nextLine["Pregunta"]==null):
 		nextLine=line
 	line=nextLine
@@ -246,11 +328,15 @@ func getGuionLine(idxNextLine):
 func swPause(pauseFlag):
 	canSwipe=!pauseFlag
 
-
 func _on_resized():
 	var newSize =get_window().size
 	perSizey = newSize[1]/1080.0
+	perSizeX= newSize[0]/1920.0
 	initialPosition=$Panel/bankCard.position
 
 func _on_chemtective_resized():
 	pass # Replace with function body.
+func startTimerMenu(seconds):
+	timerMenuVar = seconds
+func timerMenuDone():
+	return timerMenuVar <= 0

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://wgrtw5x56ror"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3iq76"]
+[ext_resource type="Texture2D" uid="uid://cciglkch7f81q" path="res://Sprites/Game/pantallas/principal/bg_principal.png" id="2_6pijm"]
+[ext_resource type="Texture2D" uid="uid://ox6hgmyn1cyd" path="res://Sprites/Game/pantallas/principal/Recurso 2.png" id="3_aae8l"]
+[ext_resource type="Texture2D" uid="uid://c5vfjgywanlf1" path="res://Sprites/Game/pantallas/principal/logo_pantalla_principal.png" id="4_72klc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2gv3"]
+size = Vector2(188, 324)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndyv2"]
+size = Vector2(1080, 410)
+
+[node name="MainMenu" type="Node2D"]
+process_priority = 1
+z_index = 20
+position = Vector2(546, 968)
+script = ExtResource("1_3iq76")
+
+[node name="Bg" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6pijm")
+
+[node name="Credits" type="Sprite2D" parent="Bg"]
+position = Vector2(102.5, 169)
+texture = ExtResource("3_aae8l")
+
+[node name="Area2D" type="Area2D" parent="Bg/Credits"]
+position = Vector2(438, 791)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bg/Credits/Area2D"]
+position = Vector2(-438, -790)
+shape = SubResource("RectangleShape2D_k2gv3")
+
+[node name="Credref" type="Sprite2D" parent="Bg"]
+visible = false
+position = Vector2(102.5, 169)
+texture = ExtResource("3_aae8l")
+
+[node name="Logo" type="Sprite2D" parent="Bg"]
+position = Vector2(540.5, 960)
+texture = ExtResource("4_72klc")
+
+[node name="Start" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Start"]
+position = Vector2(-4, 760)
+shape = SubResource("RectangleShape2D_ndyv2")
+
+[connection signal="input_event" from="Bg/Credits/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Start" to="." method="_on_start_input_event"]
