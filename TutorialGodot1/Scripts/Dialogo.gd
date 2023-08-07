@@ -3,6 +3,12 @@ extends Control
 signal OpenMenu
 signal CloseMenu
 
+var pinturas=["res://Sprites/Game/pintura/pintura1.png",
+			"res://Sprites/Game/pintura/pintura2.png",
+			"res://Sprites/Game/pintura/pintura3.png",
+			"res://Sprites/Game/pintura/pintura4.png",
+			"res://Sprites/Game/pintura/pintura5.png"]
+
 enum MenuStates{MENUCLOSE, MENUOPEN, MENUOPENING, MENUCLOSING}
 var menuS = MenuStates.MENUCLOSE
 var menuPrev = MenuStates.MENUCLOSE 
@@ -72,7 +78,7 @@ func knowPressed(inPos):
 	var perceScreen= inPos.y/(float(currentVpos))
 	if(perceScreen<.17 and not isMenu):
 		MenuOpened=true
-	elif (perceScreen>.90 and isMenu):
+	elif (perceScreen>.80 and isMenu):
 		MenuClosed=true
 	else:
 		pressed = true
@@ -82,10 +88,12 @@ func _process(delta):
 	if(!endHistory):
 		if (Input.is_action_just_pressed("ui_left")):
 #########################################################CHECKPOINT################################
-			getGuionLine("53")							#Checkpoint manual
-			errors=2
+			#getGuionLine("53")							#Checkpoint manual
+			pass
+			#errors=2
 		if (Input.is_action_just_pressed("ui_right")):
 			pass
+		pass
 	if(canSwipe):
 		swipeChoise(delta)
 	fallCard(delta)
@@ -279,6 +287,7 @@ func loadCard(nextLine):
 		$Panel/Tablero.color="#454537"
 		$Panel/Tablero/CircleC.visible=false
 		$Panel/DialogResp.visible=false
+		$Panel/Pintura.visible=false
 		$Panel/currentCard.showNarrativa(nextLine["Pregunta"])
 	else:
 		$DarkMode.z_index=-1
@@ -291,6 +300,7 @@ func loadCard(nextLine):
 		$Panel/Dialogo1.text= text
 		$Panel/Tablero/CircleC.visible=true
 		$Panel/DialogResp.visible=true
+		$Panel/Pintura.visible=true
 		$Panel/Tablero.color="#89897d"
 		if(nextLine["ImagenR"]!=null):
 			$Panel/currentCard.setImg(nextLine["ImagenR"])
@@ -309,6 +319,9 @@ func loadCard(nextLine):
 
 	if(nextLine["IsError"]==true):
 		errors+=1
+		if(errors>=4):
+			errors=4
+		$Panel/Pintura.texture=load(pinturas[errors])
 	if(nextLine["IsCheckPoint"]==true):
 		checkpoint=nextLine
 
@@ -319,6 +332,7 @@ func getGuionLine(idxNextLine):
 		currentCap = maindata[idxNextLine]
 		nextLine=findLine(currentCap,"2")
 		errors = 0;
+		$Panel/Pintura.texture=load(pinturas[errors])
 	else:
 		nextLine=findLine(currentCap,idxNextLine)
 	if( nextLine==null or nextLine["Pregunta"]==null):

@@ -14,18 +14,6 @@ func _on_vol_slider_value_changed(value):
 	else:
 		AudioServer.set_bus_mute(bus_idx,true)
 
-
-
-func _on_salir_pressed():
-	get_tree().quit()
-
-
-func _on_mouse_entered():
-	print("AAA")
-	if(pressed):
-		print("BBBB")
-	pass # Replace with function body.
-
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -34,3 +22,7 @@ func _input(event):
 				initialMousePosition= get_local_mouse_position()
 			else:  # Se soltó el botón izquierdo del mouse
 				pressed = false
+
+
+func _on_texture_button_pressed():
+	get_tree().quit()
