@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dagygwqcpjahy"]
+[gd_scene load_steps=27 format=3 uid="uid://dagygwqcpjahy"]
 
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
 [ext_resource type="FontFile" uid="uid://cuvbydnpy5d32" path="res://Fonts/Planet Comic.otf" id="3_g8x8e"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://deghgrw5j3gwo" path="res://Sprites/Game/pantallas/ajustes/BotonSalir.png" id="13_8tfli"]
 [ext_resource type="Texture2D" uid="uid://opgmi58801bc" path="res://Sprites/Menu.png" id="13_43ea1"]
 [ext_resource type="Texture2D" uid="uid://dyyh5oeb5d8rw" path="res://Sprites/Game/pantallas/ajustes/BotonSalirPressed.png" id="14_41rjn"]
+[ext_resource type="Texture2D" uid="uid://ox6hgmyn1cyd" path="res://Sprites/Game/pantallas/principal/Recurso 2.png" id="16_bxugx"]
+[ext_resource type="Texture2D" uid="uid://bqg80yu58fsob" path="res://Sprites/Game/pantallas/principal/creditos1.png" id="17_rsxhu"]
 
 [sub_resource type="Animation" id="Animation_5vsnk"]
 resource_name = "Historia"
@@ -528,6 +530,19 @@ offset_bottom = 1429.0
 texture_normal = ExtResource("13_8tfli")
 texture_pressed = ExtResource("14_41rjn")
 
+[node name="btnCredits" type="TextureButton" parent="IU/Menu/ColorRect/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.083
+anchor_bottom = 0.083
+offset_left = 880.0
+offset_top = -105.36
+offset_right = 1071.0
+offset_bottom = 213.64
+scale = Vector2(0.741655, 0.741655)
+texture_normal = ExtResource("16_bxugx")
+texture_pressed = ExtResource("17_rsxhu")
+
 [node name="MenuAnim" type="AnimationPlayer" parent="IU/Menu"]
 libraries = {
 "": SubResource("AnimationLibrary_8v7a8")
@@ -564,5 +579,6 @@ libraries = {
 [connection signal="resized" from="Game" to="Game" method="_on_resized"]
 [connection signal="value_changed" from="IU/Menu/ColorRect/Panel/volSlider" to="IU/Menu" method="_on_vol_slider_value_changed"]
 [connection signal="pressed" from="IU/Menu/ColorRect/Panel/TextureButton" to="IU/Menu" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="IU/Menu/ColorRect/Panel/btnCredits" to="Game" method="_on_btn_credits_pressed"]
 
 [editable path="Game/Panel/currentCard"]

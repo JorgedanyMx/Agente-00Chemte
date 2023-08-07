@@ -43,14 +43,20 @@ var perSizey =1
 var perSizeX= 1
 var timerMenuVar=0.0
 
+var checkpointCapter=""
+var checkpointLine={}
+var nameCap=""
+
 
 func _ready():
 	gameSize =get_window().size
 	maindata = Get_data()
+	nameCap =maindata.keys()[0]
 	currentCap=maindata[maindata.keys()[0]]
-	print(maindata.keys())
+	checkpointCapter=currentCap
 	#print(currentCap)
 	line=currentCap["2"]
+	checkpointLine= line
 	initialPosition = $Panel/currentCard.position
 	initialRotation = $Panel/currentCard.rotation
 	showCard(line)
@@ -58,6 +64,8 @@ func _ready():
 	$Panel/currentCard.flipFront()
 	$Panel/currentCard.changeAlphaDer(0)
 	$Panel/currentCard.changeAlphaIzq(0)
+	checkpointCapter=currentCap
+	checkpointLine=line
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -205,7 +213,6 @@ func swipeChoise(delta):
 	else:
 		if(abs(deltaPos.x) >= 200.0 and not MenuClosed and not MenuOpened):
 			choiseAnswer(deltaPos.x)
-			print(errors)
 		# Mover la carta suavemente hacia la posición inicial
 		deltaPos = Vector2.ZERO
 		$Panel/currentCard.changeAlphaDer(abs(deltaPos.x)/100)
@@ -260,21 +267,30 @@ func  Get_data():
 func showCard(nextLine):
 	if(nextLine!=null):
 		if(nextLine["Personaje"]=="#FINAL"):
-			print("final!")
-			if(errors==0):
-				var idx=""+str(nextLine["Pregunta"])
-				getGuionLine(idx)
-				loadCard(line)
-			elif(errors<3):
-				var idx=""+str(nextLine["R A"])
-				$Panel/DialogResp/Respuesta.text=idx
-				getGuionLine(idx)
+			if(nameCap=="Creditos"):
+				currentCap=checkpointCapter
+				print(currentCap)
+				line=checkpointLine
+				print("lineaActual"+str(line))
 				loadCard(line)
 			else:
-				var idx=""+str(nextLine["R B"])
-				getGuionLine(idx)
-				loadCard(line)
-			#getGuionLine
+				if(errors==0):
+					var idx=""+str(nextLine["Pregunta"])
+					nameCap=idx
+					getGuionLine(idx)
+					loadCard(line)
+				elif(errors<3):
+					var idx=""+str(nextLine["R A"])
+					
+					nameCap=idx
+					$Panel/DialogResp/Respuesta.text=idx
+					getGuionLine(idx)
+					loadCard(line)
+				else:
+					var idx=""+str(nextLine["R B"])
+					nameCap=idx
+					getGuionLine(idx)
+					loadCard(line)
 		else:
 			loadCard(nextLine)
 
@@ -292,7 +308,6 @@ func loadCard(nextLine):
 	else:
 		$DarkMode.z_index=-1
 		$Panel/currentCard.z_index=1
-		print(nextLine["ImagenP"])
 		if(nextLine["ImagenP"]!=null):
 			$Panel/Tablero/CircleC/Char.texture=load("res://Sprites/"+nextLine["ImagenP"]) as Texture
 		$Panel/currentCard.imgCard()
@@ -354,3 +369,15 @@ func startTimerMenu(seconds):
 	timerMenuVar = seconds
 func timerMenuDone():
 	return timerMenuVar <= 0
+func ShowCredits():
+	nameCap="Creditos"
+	checkpointCapter=currentCap
+	print("El capitulo guardado es: "+str(checkpointCapter))
+	checkpointLine=line
+	print("El capitulo guardado es: "+str(checkpointLine))
+	currentCap=maindata["Creditos"]
+	line=currentCap["2"]
+	showCard(line)
+
+func _on_btn_credits_pressed():
+	ShowCredits()
