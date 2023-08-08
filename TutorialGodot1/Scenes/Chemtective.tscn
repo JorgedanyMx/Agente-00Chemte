@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dagygwqcpjahy"]
+[gd_scene load_steps=30 format=3 uid="uid://dagygwqcpjahy"]
 
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
 [ext_resource type="FontFile" uid="uid://cuvbydnpy5d32" path="res://Fonts/Planet Comic.otf" id="3_g8x8e"]
@@ -52,6 +52,67 @@ tracks/0/keys = {
 _data = {
 "Historia": SubResource("Animation_5vsnk"),
 "RESET": SubResource("Animation_08jib")
+}
+
+[sub_resource type="Animation" id="Animation_qkekg"]
+resource_name = "ShakePic"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0, -0.0872665, 0.0, 0.0872665, 0.0, -0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_47shc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f2y8h"]
+_data = {
+"RESET": SubResource("Animation_47shc"),
+"ShakePic": SubResource("Animation_qkekg")
 }
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_k356h"]
@@ -403,11 +464,19 @@ anchor_left = 0.5
 anchor_top = 0.8
 anchor_right = 0.5
 anchor_bottom = 0.991
-offset_left = -335.48
-offset_top = 16.2158
-offset_right = 265.52
-offset_bottom = 0.831787
+offset_left = -308.0
+offset_top = 15.7999
+offset_right = 312.0
+offset_bottom = 0.416016
+pivot_offset = Vector2(310, 167)
 texture = ExtResource("9_iq6e5")
+
+[node name="PicSound" type="AudioStreamPlayer" parent="Game/Panel/Pintura"]
+
+[node name="PicAnim" type="AnimationPlayer" parent="Game/Panel/Pintura"]
+libraries = {
+"": SubResource("AnimationLibrary_f2y8h")
+}
 
 [node name="Sonidos" type="AudioStreamPlayer" parent="Game"]
 pitch_scale = 1.61
@@ -435,9 +504,13 @@ script = ExtResource("6_uip2p")
 [node name="Menu" type="Control" parent="IU"]
 z_index = 10
 layout_mode = 1
-anchor_top = -0.925
-anchor_bottom = 0.075
-offset_right = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1776.0
+offset_bottom = -1776.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("10_phr34")
 
 [node name="ColorRect" type="TextureRect" parent="IU/Menu"]
@@ -552,11 +625,13 @@ libraries = {
 pitch_scale = 2.34
 
 [node name="Menu2" type="Control" parent="IU"]
+visible = false
 z_index = 10
 layout_mode = 1
 anchor_top = -0.925
 anchor_bottom = 0.075
 offset_right = 1080.0
+offset_bottom = 1920.0
 grow_horizontal = 2
 script = ExtResource("10_phr34")
 

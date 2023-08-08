@@ -8,6 +8,10 @@ var pinturas=["res://Sprites/Game/pintura/pintura1.png",
 			"res://Sprites/Game/pintura/pintura3.png",
 			"res://Sprites/Game/pintura/pintura4.png",
 			"res://Sprites/Game/pintura/pintura5.png"]
+var pinturasSound = ["res://Audio/Ruptura1.wav",
+					"res://Audio/Ruptura2.wav",
+					"res://Audio/Ruptura3.wav",
+					"res://Audio/Ruptura4.wav"]
 
 enum MenuStates{MENUCLOSE, MENUOPEN, MENUOPENING, MENUCLOSING}
 var menuS = MenuStates.MENUCLOSE
@@ -269,9 +273,7 @@ func showCard(nextLine):
 		if(nextLine["Personaje"]=="#FINAL"):
 			if(nameCap=="Creditos"):
 				currentCap=checkpointCapter
-				print(currentCap)
 				line=checkpointLine
-				print("lineaActual"+str(line))
 				loadCard(line)
 			else:
 				if(errors==0):
@@ -337,6 +339,12 @@ func loadCard(nextLine):
 		if(errors>=4):
 			errors=4
 		$Panel/Pintura.texture=load(pinturas[errors])
+		if(errors>0):
+			var pinS= load(pinturasSound[errors-1])
+			$Panel/Pintura/PicSound.stream=pinS
+			$Panel/Pintura/PicSound.play()
+			$Panel/Pintura/PicAnim.play("ShakePic")
+		
 	if(nextLine["IsCheckPoint"]==true):
 		checkpoint=nextLine
 
@@ -356,13 +364,11 @@ func getGuionLine(idxNextLine):
 
 func swPause(pauseFlag):
 	canSwipe=!pauseFlag
-
 func _on_resized():
 	var newSize =get_window().size
 	perSizey = newSize[1]/1080.0
 	perSizeX= newSize[0]/1920.0
 	initialPosition=$Panel/bankCard.position
-
 func _on_chemtective_resized():
 	pass # Replace with function body.
 func startTimerMenu(seconds):
@@ -372,12 +378,9 @@ func timerMenuDone():
 func ShowCredits():
 	nameCap="Creditos"
 	checkpointCapter=currentCap
-	print("El capitulo guardado es: "+str(checkpointCapter))
 	checkpointLine=line
-	print("El capitulo guardado es: "+str(checkpointLine))
 	currentCap=maindata["Creditos"]
 	line=currentCap["2"]
 	showCard(line)
-
 func _on_btn_credits_pressed():
 	ShowCredits()
