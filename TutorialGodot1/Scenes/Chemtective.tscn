@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dagygwqcpjahy"]
+[gd_scene load_steps=31 format=3 uid="uid://dagygwqcpjahy"]
 
 [ext_resource type="Script" path="res://Scripts/Dialogo.gd" id="2_6btu7"]
 [ext_resource type="FontFile" uid="uid://cuvbydnpy5d32" path="res://Fonts/Planet Comic.otf" id="3_g8x8e"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://wn1x65e1xg03" path="res://Sprites/Game/Dialogo.png" id="5_bs1wo"]
 [ext_resource type="PackedScene" uid="uid://cejykutun8cyu" path="res://Pref/card.tscn" id="6_fg0nq"]
 [ext_resource type="Script" path="res://Scenes/UIControl.gd" id="6_uip2p"]
+[ext_resource type="Texture2D" uid="uid://cqxt4h4rddvm7" path="res://Sprites/Game/Dialogo1.png" id="6_wvhjh"]
 [ext_resource type="Texture2D" uid="uid://dw4wa5boc1y8q" path="res://Sprites/Game/pintura/pintura1.png" id="9_iq6e5"]
+[ext_resource type="AudioStream" uid="uid://df775ro84gjqx" path="res://Audio/MexicoslowSong.wav" id="10_4om77"]
 [ext_resource type="Script" path="res://Scenes/MenuControl.gd" id="10_phr34"]
-[ext_resource type="Texture2D" uid="uid://c4xh5v7wkouf" path="res://Sprites/Dialogo1.png" id="10_wuvqn"]
 [ext_resource type="Texture2D" uid="uid://dus17qs5fmeb8" path="res://Sprites/Game/pantallas/ajustes/Slider.png" id="12_qg823"]
 [ext_resource type="Texture2D" uid="uid://deghgrw5j3gwo" path="res://Sprites/Game/pantallas/ajustes/BotonSalir.png" id="13_8tfli"]
 [ext_resource type="Texture2D" uid="uid://opgmi58801bc" path="res://Sprites/Menu.png" id="13_43ea1"]
@@ -359,15 +360,18 @@ z_index = 9
 z_as_relative = false
 position = Vector2(231.431, -219.711)
 scale = Vector2(0.88, 0.88)
-texture = ExtResource("10_wuvqn")
+texture = ExtResource("6_wvhjh")
 
 [node name="txtRespDer" parent="Game/Panel/currentCard/Front/Content/RespDer" index="0"]
 z_index = 9
 z_as_relative = false
-offset_top = -248.357
-offset_bottom = -248.605
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 15
+offset_top = -235.34
+offset_bottom = -235.588
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.309804, 0.278431, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("3_m4qun")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 
@@ -376,17 +380,21 @@ z_index = 9
 z_as_relative = false
 position = Vector2(-245.322, -219.805)
 scale = Vector2(0.88, 0.88)
-texture = ExtResource("10_wuvqn")
+texture = ExtResource("6_wvhjh")
 
 [node name="txtRespIzq" parent="Game/Panel/currentCard/Front/Content/RespIzq" index="0"]
 z_index = 9
 z_as_relative = false
-offset_top = -256.416
-offset_bottom = -256.664
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 15
+offset_top = -232.961
+offset_bottom = -233.209
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.309804, 0.278431, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("3_m4qun")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
+fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Dialogo1" type="RichTextLabel" parent="Game/Panel"]
@@ -491,6 +499,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BGSound" type="AudioStreamPlayer" parent="Game"]
+stream = ExtResource("10_4om77")
+volume_db = -15.0
+autoplay = true
+
 [node name="IU" type="Control" parent="."]
 z_index = 10
 layout_mode = 1
@@ -512,6 +525,7 @@ offset_bottom = -1776.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_phr34")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="TextureRect" parent="IU/Menu"]
 layout_mode = 1
@@ -631,7 +645,7 @@ layout_mode = 1
 anchor_top = -0.925
 anchor_bottom = 0.075
 offset_right = 1080.0
-offset_bottom = 1920.0
+offset_bottom = 3840.0
 grow_horizontal = 2
 script = ExtResource("10_phr34")
 

@@ -17,8 +17,10 @@ func infoCard(resp1,resp2):
 	#$Front.texture=cardBg as Texture 
 	changeAlphaIzq(1)
 	changeAlphaDer(1)
+	resp1="[center]"+resp1+ "[/center]"
 	$Front/Content/RespDer/txtRespDer.text=resp1
 	if(resp2!=null):
+		resp2="[center]"+resp2+ "[/center]"
 		$Front/Content/RespIzq/txtRespIzq.text=resp2
 	else:
 		$Front/Content/RespIzq/txtRespIzq.text=resp1
